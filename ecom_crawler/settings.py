@@ -13,22 +13,33 @@ SPIDER_MODULES = ["ecom_crawler.spiders"]
 NEWSPIDER_MODULE = "ecom_crawler.spiders"
 
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "ecom_crawler (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
-# Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+# Crawl responsibly by identifying yourself (and your website) on the user-agent
+# USER_AGENT = 'ecom_crawler (+http://justCrawlingForFun.com)' 
 
-# Configure a delay for requests for the same website (default: 0)
-# See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
-# See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
-# The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+# Configure maximum concurrent requests performed by Scrapy (default: 16)
+CONCURRENT_REQUESTS = 16 # Depending on the machine, can be adjusted
+CONCURRENT_REQUESTS_PER_DOMAIN = 4 # domains should't be overburdened
+DOWNLOAD_DELAY = 0.5 # Start with a delay, let AutoThrottle adjust if enabled
+AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_START_DELAY = 1
+AUTOTHROTTLE_MAX_DELAY = 30
+AUTOTHROTTLE_TARGET_CONCURRENCY = 4.0 # Aim for average 4 requests/domain concurrently
+# AUTOTHROTTLE_DEBUG = True # Enable to see throttling decisions
+
+
+# --- Crawling Strategy ---
+DEPTH_LIMIT = 0 # 0 means no limit, you can set > 0 to limit crawl depth if needed(in case its taking too long due to number of products)
+#DEPTH_PRIORITY = 1 # Try=> BFS (Breadth-First Search)
+
+ITEM_PIPELINES = {
+   'ecom_crawler.pipelines.GroupedOutputPipeline': 300,
+}
+
 
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
@@ -87,6 +98,9 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
 
-# Set settings whose default value is deprecated to a future-proof value
+DEFAULT_REQUEST_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0 Safari/537.36'
+}
+RETRY_TIMES = 3
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"

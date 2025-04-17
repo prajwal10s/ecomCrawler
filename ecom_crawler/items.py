@@ -3,11 +3,9 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
 
+
 import scrapy
 
-
-class EcomCrawlerItem(scrapy.Item):
-    # defining the fields for our item here 
+class ProductItem(scrapy.Item):
     domain = scrapy.Field()
     url = scrapy.Field()
-    
