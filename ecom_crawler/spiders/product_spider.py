@@ -53,14 +53,14 @@ class EcomProductSpider(CrawlSpider):
     name = 'ecom_product_spider'
 
     #uncomment below to test out anything
-    def start_requests(self):
-      for domain in self.allowed_domains:
-          if domain == "tatacliq.com":
-              yield scrapy.Request(
-                  url="https://www.tatacliq.com/womens-clothing/c-msh1014",
-                  callback=self.parse_page,
-                  meta={"playwright": True}
-              )
+    # def start_requests(self):
+    #   for domain in self.allowed_domains:
+    #       if domain == "tatacliq.com":
+    #           yield scrapy.Request(
+    #               url="https://www.tatacliq.com/womens-clothing/c-msh1014",
+    #               callback=self.parse_page,
+    #               meta={"playwright": True}
+    #           )
     # Input domains will be passed via the command line
     # scrapy crawl ecom_product_spider -a domains="virgio.com,westside.com,tatacliq.com,nykaafashion.com" 
     # run above command to run on all 4 mentioned domains
@@ -278,4 +278,3 @@ class EcomProductSpider(CrawlSpider):
                   callback=self.parse_page
               )
             
-
