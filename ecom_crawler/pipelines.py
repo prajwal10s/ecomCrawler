@@ -36,8 +36,6 @@ class GroupedOutputPipeline:
             spider.logger.warning(f"Item missing domain or URL: {item}")
 
         # We don't return the item because this pipeline handles the final output
-        # If you had other pipelines AFTER this, you'd need to return item
-        # raise DropItem("Item processed by GroupedOutputPipeline") # Or just don't return
         return item # Return item if you want other pipelines (like default FeedExporter) to see it too
                    # If ONLY using this pipeline for output, dropping is fine. Let's return it
                    # to allow flexibility (e.g., using FEEDS for a flat CSV alongside this grouped JSON).

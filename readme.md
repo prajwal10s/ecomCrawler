@@ -1,5 +1,7 @@
 # Documentation
 
+## What ecomCrawler does: Gives you clickable links from Ecommerce websites like Westside and Virgio in JSON format separated by domains
+
 ## Decisions
 
 1. Choosing the stack:
